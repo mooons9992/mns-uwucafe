@@ -109,36 +109,60 @@ Add the following to `qb-core/shared/jobs.lua`:
 Add to `dpemotes/client/AnimationList.lua`:
 
 ```lua
-["bubbletea"] = {"amb@world_human_drinking@coffee@male@idle_a", "idle_c", "", AnimationOptions = { 
-	Prop = 'apa_prop_cs_plastic_cup_01', 
-	PropBone = 28422, 
-	PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, 
-	EmoteLoop = true, 
-	EmoteMoving = true, 
-}}, 
-["misosoup"] = {"amb@world_human_drinking@coffee@male@idle_a", "idle_c", "", AnimationOptions = { 
-	Prop = 'v_ret_247_noodle1', 
-	PropBone = 28422, 
-	PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, 
-	EmoteLoop = true, 
-	EmoteMoving = true, 
-}}, 
-["uwusandy"] = {"mp_player_inteat@burger", "mp_player_int_eat_burger", "", AnimationOptions = { 
-	Prop = 'ng_proc_food_ornge1a', 
-	PropBone = 18905, 
-	PropPlacement = {0.13, 0.05, 0.02, -50.0, 16.0, 60.0}, 
-	EmoteMoving = true, 
-}}, 
-["budhabowl"] = {"anim@scripted@island@special_peds@pavel@hs4_pavel_ig5_caviar_p1", "base_idle", "", AnimationOptions = { 
-	Prop = "prop_cs_bowl_01b", 
-	PropBone = 60309, 
-	PropPlacement = {0.0, 0.0300, 0.0100, 0.0, 0.0, 0.0}, 
-	SecondProp = 'h4_prop_h4_caviar_spoon_01a', 
-	SecondPropBone = 28422, 
-	SecondPropPlacement = {0.0,0.0,0.0,0.0,0.0,0.0}, 
-	EmoteLoop = true, 
-	EmoteMoving = true, 
-}}
+["bubbletea"] = {
+    "amb@world_human_drinking@coffee@male@idle_a",
+    "idle_c",
+    "Bubble Tea",
+    "bubbletea",
+    AnimationOptions = {
+        Prop = 'apa_prop_cs_plastic_cup_01',
+        PropBone = 28422,
+        PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+        EmoteLoop = true,
+        EmoteMoving = true
+    }
+},
+["misosoup"] = {
+    "amb@world_human_drinking@coffee@male@idle_a",
+    "idle_c",
+    "Miso Soup",
+    "misosoup",
+    AnimationOptions = {
+        Prop = 'v_ret_247_noodle1',
+        PropBone = 28422,
+        PropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+        EmoteLoop = true,
+        EmoteMoving = true
+    }
+},
+["uwusandy"] = {
+    "mp_player_inteat@burger",
+    "mp_player_int_eat_burger",
+    "UwU Sandwich",
+    "uwusandy",
+    AnimationOptions = {
+        Prop = 'ng_proc_food_ornge1a',
+        PropBone = 18905,
+        PropPlacement = {0.13, 0.05, 0.02, -50.0, 16.0, 60.0},
+        EmoteMoving = true
+    }
+},
+["budhabowl"] = {
+    "anim@scripted@island@special_peds@pavel@hs4_pavel_ig5_caviar_p1",
+    "base_idle",
+    "Buddha Bowl",
+    "budhabowl",
+    AnimationOptions = {
+        Prop = "prop_cs_bowl_01b",
+        PropBone = 60309,
+        PropPlacement = {0.0, 0.0300, 0.0100, 0.0, 0.0, 0.0},
+        SecondProp = 'h4_prop_h4_caviar_spoon_01a',
+        SecondPropBone = 28422,
+        SecondPropPlacement = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+        EmoteLoop = true,
+        EmoteMoving = true
+    }
+}
 ```
 ## Configuration
 
