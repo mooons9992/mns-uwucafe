@@ -217,8 +217,9 @@ RegisterNetEvent('mns-UwUCafe:client:PurchaseIngredient', function(data)
                         anim = "givetake1_a",
                         flags = 49,
                     }, {}, {}, function() -- Done
+                        -- REMOVE CLIENT NOTIFICATION - Let server handle it
                         TriggerServerEvent('mns-UwUCafe:server:PurchaseIngredients', data.item, amount, totalPrice)
-                        QBCore.Functions.Notify("Purchased " .. amount .. "x " .. data.label, "success", 3000)
+                        -- Removed duplicate notification here
                     end, function() -- Cancel
                         QBCore.Functions.Notify("Cancelled order.", "error")
                     end)
@@ -430,7 +431,6 @@ RegisterNetEvent('mns-UwUCafe:client:MakeFood', function(foodItem, ingredients, 
     local Player = QBCore.Functions.GetPlayerData()
     
     if Player.job.name ~= Config.Job or not Player.job.onduty then
-        QBCore.Functions.Notify('You must be on duty', 'error')
         return
     end
     
@@ -455,10 +455,13 @@ RegisterNetEvent('mns-UwUCafe:client:MakeFood', function(foodItem, ingredients, 
                 anim = anim or "a_uncuff",
                 flags = 8,
             }, {}, {}, function() -- Done
+                -- FIXED: Remove client notification to prevent duplication
+                -- The server will handle sending a single notification
                 TriggerServerEvent('mns-UwUCafe:server:GiveFood', foodItem.name, ingredients)
-                QBCore.Functions.Notify("You have made a " .. foodItem.label, "success")
+                ClearPedTasks(PlayerPedId())
             end, function() -- Cancel
                 QBCore.Functions.Notify("Cancelled making " .. foodItem.label, "error")
+                ClearPedTasks(PlayerPedId())
             end)
         else
             QBCore.Functions.Notify("You don't have all the required ingredients!", "error")

@@ -828,15 +828,16 @@ RegisterNetEvent('mns-UwUCafe:client:OpenBillingMenu', function()
         
         -- Check if user wants to go back
         if tonumber(dialog.playerid) == 0 then
+            -- Add a small delay to prevent menu flickering
+            Wait(200)
             TriggerEvent('mns-UwUCafe:client:ViewMenu')
             return
         end
         
         TriggerServerEvent("mns-UwUCafe:server:BillPlayer", dialog.playerid, dialog.amount)
     else
-        -- User cancelled - return to menu
-        Wait(100)
-        TriggerEvent('mns-UwUCafe:client:ViewMenu')
+        -- User cancelled - don't automatically return to menu
+        -- Removed the automatic reopening of the menu here
     end
 end)
 

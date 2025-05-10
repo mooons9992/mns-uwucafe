@@ -255,18 +255,16 @@ RegisterNetEvent('mns-UwUCafe:server:PurchaseIngredients', function(item, amount
     end
     
     -- Add items to player
-    if item and amount and amount > 0 then
-        Player.Functions.AddItem(item, amount)
-        
-        -- Show notification
-        if QBCore.Shared.Items[item] then
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", amount)
-            TriggerClientEvent('QBCore:Notify', src, 'Purchased ' .. amount .. 'x ' .. QBCore.Shared.Items[item].label, 'success')
-        else
-            TriggerClientEvent('QBCore:Notify', src, 'Purchased ' .. amount .. 'x ' .. item, 'success')
-        end
+    local success = Player.Functions.AddItem(item, amount)
+    if success then
+        -- Send single notification with the proper item label
+        local itemLabel = QBCore.Shared.Items[item] and QBCore.Shared.Items[item].label or item
+        TriggerClientEvent('QBCore:Notify', src, 'You purchased ' .. amount .. 'x ' .. itemLabel, 'success')
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", amount)
     else
-        TriggerClientEvent('QBCore:Notify', src, 'Invalid item or amount', 'error')
+        TriggerClientEvent('QBCore:Notify', src, "Couldn't add item to inventory.", "error")
+        -- Refund money
+        Player.Functions.AddMoney('bank', price, 'UwU Cafe Ingredients Purchase Refund')
     end
 end)
 
@@ -439,19 +437,20 @@ RegisterNetEvent('mns-UwUCafe:server:GiveFood', function(itemName, ingredients)
         -- Remove ingredients
         for item, amount in pairs(ingredients) do
             Player.Functions.RemoveItem(item, amount)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove", amount)
+            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "remove")
         end
         
-        -- Give food
-        if QBCore.Shared.Items[itemName] then
-            Player.Functions.AddItem(itemName, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[itemName], "add")
-            TriggerClientEvent('QBCore:Notify', src, 'You prepared ' .. QBCore.Shared.Items[itemName].label, 'success')
-        else
-            TriggerClientEvent('QBCore:Notify', src, 'Invalid food item', 'error')
-        end
+        -- Add crafted item
+        Player.Functions.AddItem(itemName, 1)
+        
+        -- Get the label for a better notification message
+        local itemLabel = QBCore.Shared.Items[itemName] and QBCore.Shared.Items[itemName].label or itemName
+        
+        -- Send single combined notification
+        TriggerClientEvent('QBCore:Notify', src, 'You prepared a ' .. itemLabel, 'success')
+        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[itemName], "add")
     else
-        TriggerClientEvent('QBCore:Notify', src, 'You do not have all required ingredients', 'error')
+        TriggerClientEvent('QBCore:Notify', src, 'You do not have the required ingredients.', 'error')
     end
 end)
 
