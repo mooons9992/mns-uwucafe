@@ -3,7 +3,7 @@ game 'gta5'
 
 name 'mns-uwucafe'
 description 'UwU Cat Cafe Resource - QBCore Framework'
-author 'Original by Mooons, Enhanced by User'
+author 'Mooons'
 version '2.0.0'
 
 lua54 'yes'
