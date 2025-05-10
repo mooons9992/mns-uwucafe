@@ -457,7 +457,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient",
                 args = {
-                    item = "uwu-flour",
+                    item = "uwu_flour",
                     price = Config.Prices.Basic or 20,
                     label = "Flour"
                 }
@@ -469,7 +469,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-sugar",
+                    item = "uwu_sugar",
                     price = Config.Prices.Basic or 20,
                     label = "Sugar"
                 }
@@ -481,7 +481,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-milk",
+                    item = "uwu_milk",
                     price = Config.Prices.Basic or 20,
                     label = "Milk"
                 }
@@ -493,7 +493,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-coffeebeans",
+                    item = "uwu_coffeebeans",
                     price = Config.Prices.Basic or 20,
                     label = "Coffee Beans"
                 }
@@ -505,7 +505,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-tea",
+                    item = "uwu_tea",
                     price = Config.Prices.Basic or 20,
                     label = "Tea Leaves"
                 }
@@ -517,7 +517,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-water",
+                    item = "uwu_water",
                     price = Config.Prices.Basic or 20,
                     label = "Water"
                 }
@@ -534,7 +534,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-strawberries",
+                    item = "uwu_strawberries",
                     price = Config.Prices.Special or 40,
                     label = "Strawberries"
                 }
@@ -546,7 +546,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-chocolate",
+                    item = "uwu_chocolate",
                     price = Config.Prices.Special or 40,
                     label = "Chocolate"
                 }
@@ -558,7 +558,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-vanilla",
+                    item = "uwu_vanilla",
                     price = Config.Prices.Special or 40,
                     label = "Vanilla"
                 }
@@ -570,7 +570,7 @@ RegisterNetEvent('mns-UwUCafe:client:OpenIngredientShop', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseIngredient", 
                 args = {
-                    item = "uwu-tapioca",
+                    item = "uwu_tapioca",
                     price = Config.Prices.Special or 40,
                     label = "Tapioca Pearls"
                 }
@@ -626,7 +626,7 @@ RegisterNetEvent('mns-UwUCafe:client:ViewMenu', function()
         
         {
             header = "• Ice Cream",
-            txt = "Vanilla: $" .. (Config.MenuPrices.IceCream or 30) .. ", Chocolate: $" .. (Config.MenuPrices.IceCream or 30) .. ", Strawberry: $" .. (Config.MenuPrices.IceCream or 30),
+            txt = "Vanilla: $" .. (Config.MenuPrices.Cupcake or 30) .. ", Chocolate: $" .. (Config.MenuPrices.Cupcake or 30) .. ", Strawberry: $" .. (Config.MenuPrices.Cupcake or 30),
             params = {
                 event = "mns-UwUCafe:client:NotifyNeedEmployee",
                 args = {
@@ -731,7 +731,7 @@ RegisterNetEvent('mns-UwUCafe:client:SelfServiceMenu', function()
     }
     
     -- Add self-service items from config
-    if Config.SelfService and Config.SelfService.Enabled and Config.SelfService.Items then
+    if Config.SelfService and Config.SelfService.Items then
         for item, data in pairs(Config.SelfService.Items) do
             table.insert(menu, {
                 header = data.label,
@@ -754,7 +754,7 @@ RegisterNetEvent('mns-UwUCafe:client:SelfServiceMenu', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseMenuItem",
                 args = {
-                    item = "strawberry-cupcake",
+                    item = "strawberry_cupcake",
                     price = (Config.MenuPrices.Cupcake or 25) * 1.5,
                     useBank = true
                 }
@@ -767,7 +767,7 @@ RegisterNetEvent('mns-UwUCafe:client:SelfServiceMenu', function()
             params = {
                 event = "mns-UwUCafe:client:PurchaseMenuItem",
                 args = {
-                    item = "uwu-coffee",
+                    item = "uwu_coffee",
                     price = (Config.MenuPrices.Coffee or 20) * 1.5,
                     useBank = true
                 }
@@ -854,6 +854,52 @@ RegisterNetEvent('mns-UwUCafe:client:NotifyNeedEmployee', function(data)
     ClearPedTasks(PlayerPedId())
 end)
 
+-- Version check event
+RegisterNetEvent('mns-UwUCafe:client:ShowUpdateMessage', function(newestVersion)
+    local currentVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
+    
+    if currentVersion ~= newestVersion then
+        if Config.Version and Config.Version.notifyClient then
+            QBCore.Functions.Notify("UwU Café script update available: " .. newestVersion, "primary", 10000)
+        end
+    end
+end)
+
+-- Event for food/drink consumption animations
+RegisterNetEvent('mns-UwUCafe:client:EatCupcake', function()
+    TriggerEvent('animations:client:EmoteCommandStart', {"donut"})
+    QBCore.Functions.Progressbar("eating_something", "Eating Cupcake...", 5000, false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent("QBCore:Server:SetMetaData", "hunger", QBCore.Functions.GetPlayerData().metadata["hunger"] + (Config.Effects.Cupcake.hunger or 15))
+        TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + (Config.Effects.Cupcake.thirst or 5))
+        TriggerEvent("hud:client:UpdateNeeds", QBCore.Functions.GetPlayerData().metadata["hunger"], QBCore.Functions.GetPlayerData().metadata["thirst"])
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    end, function() -- Cancel
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    end)
+end)
+
+RegisterNetEvent('mns-UwUCafe:client:DrinkCoffee', function()
+    TriggerEvent('animations:client:EmoteCommandStart', {"coffee"})
+    QBCore.Functions.Progressbar("drinking_something", "Drinking Coffee...", 5000, false, true, {
+        disableMovement = false,
+        disableCarMovement = false,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function() -- Done
+        TriggerServerEvent("QBCore:Server:SetMetaData", "thirst", QBCore.Functions.GetPlayerData().metadata["thirst"] + (Config.Effects.Coffee.thirst or 20))
+        TriggerEvent("hud:client:UpdateNeeds", QBCore.Functions.GetPlayerData().metadata["hunger"], QBCore.Functions.GetPlayerData().metadata["thirst"])
+        TriggerServerEvent('hud:server:RelieveStress', Config.Effects.Coffee.stress or 5)
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    end, function() -- Cancel
+        TriggerEvent('animations:client:EmoteCommandStart', {"c"})
+    end)
+end)
+
 -- Initialize when resource starts
 AddEventHandler('onResourceStart', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
@@ -868,6 +914,12 @@ AddEventHandler('onResourceStart', function(resourceName)
     
     -- Spawn cats
     SpawnCafeCats()
+    
+    -- Display version
+    local version = GetResourceMetadata(resourceName, 'version', 0)
+    if version then
+        print("^2[" .. resourceName .. "]^5 Version: ^7" .. version)
+    end
     
     if Config.Debug then
         print("^2UwU Cafe^7: Client script loaded")
@@ -925,4 +977,93 @@ CreateThread(function()
             CreatePeds()
         end
     end
+    
+    -- Display version information
+    local resourceName = GetCurrentResourceName()
+    local version = GetResourceMetadata(resourceName, 'version', 0)
+    
+    if version then
+        print('^2['..resourceName..'] ^5Client Version: ^7' .. version)
+    end
 end)
+
+-- Check for updates periodically
+CreateThread(function()
+    if Config.Version and Config.Version.check then
+        -- Initial check after player loads
+        Wait(10000)
+        TriggerServerEvent('mns-UwUCafe:server:CheckVersion')
+        
+        -- Periodic check (every 2 hours)
+        while true do
+            Wait(7200000) -- 2 hours
+            TriggerServerEvent('mns-UwUCafe:server:CheckVersion')
+        end
+    end
+end)
+
+-- Fix for peds disappearing
+CreateThread(function()
+    while true do
+        Wait(300000) -- Check every 5 minutes
+        
+        -- If player is logged in
+        if isLoggedIn then
+            -- Check cats
+            local needsRespawn = false
+            for i, cat in ipairs(spawnedCats) do
+                if not DoesEntityExist(cat) then
+                    needsRespawn = true
+                    break
+                end
+            end
+            
+            if needsRespawn or #spawnedCats == 0 then
+                if Config.Debug then
+                    print("^3UwU Cafe^7: One or more cats disappeared. Respawning...")
+                end
+                SpawnCafeCats()
+            end
+            
+            -- Check supplier ped
+            if Config.UsePed and not DoesEntityExist(ingredientSellerPed) then
+                if Config.Debug then
+                    print("^3UwU Cafe^7: Supplier ped disappeared. Respawning...")
+                end
+                CreatePeds()
+            end
+        end
+    end
+end)
+
+RegisterCommand('uwucafedebug', function()
+    -- Only allow server admins to run this command
+    if not IsPlayerAceAllowed(PlayerId(), "admin") then return end
+    
+    print("^3[UwUCafe Debug]^7 Checking all menu items against QBCore.Shared.Items")
+    
+    -- Check self-service items
+    if Config.SelfService and Config.SelfService.Items then
+        print("^3[UwUCafe Debug]^7 Checking Self-Service items...")
+        for item, data in pairs(Config.SelfService.Items) do
+            local exists = QBCore.Shared.Items[item] ~= nil
+            print(string.format("Item: %s | Exists: %s", item, tostring(exists)))
+        end
+    end
+    
+    -- Check crafting recipes
+    print("^3[UwUCafe Debug]^7 Checking Crafting recipe items...")
+    for recipeName, recipeData in pairs(Config.Recipes) do
+        local outputExists = QBCore.Shared.Items[recipeData.receivedItem] ~= nil
+        print(string.format("Recipe: %s | Output: %s | Exists: %s", 
+            recipeName, recipeData.receivedItem, tostring(outputExists)))
+        
+        -- Check ingredients
+        for _, ingredient in ipairs(recipeData.requiredItems) do
+            local ingredientExists = QBCore.Shared.Items[ingredient] ~= nil
+            print(string.format("  - Ingredient: %s | Exists: %s", ingredient, tostring(ingredientExists)))
+        end
+    end
+    
+    print("^3[UwUCafe Debug]^7 Debug complete")
+end, false)

@@ -232,7 +232,7 @@ RegisterNetEvent('mns-UwUCafe:client:PurchaseIngredient', function(data)
     end
 end)
 
--- Purchase item from self-service menu
+-- Purchase item from self-service menu - FIXED to remove duplicate notification
 RegisterNetEvent('mns-UwUCafe:client:PurchaseMenuItem', function(data)
     local Player = QBCore.Functions.GetPlayerData()
     
@@ -256,8 +256,8 @@ RegisterNetEvent('mns-UwUCafe:client:PurchaseMenuItem', function(data)
         -- Send request to server to complete the purchase
         TriggerServerEvent('mns-UwUCafe:server:PurchaseMenuItem', data.item, data.price, true) -- Use bank instead of cash
         
-        -- Show appropriate notification
-        QBCore.Functions.Notify("Enjoy your order! Thank you for visiting UwU Cat Cafe.", "success")
+        -- REMOVED duplicate notification - let server handle it
+        -- The server will now send a single notification with the proper item label
     end, function() -- Cancel
         QBCore.Functions.Notify("Cancelled purchase.", "error")
     end)
@@ -469,12 +469,12 @@ end)
 -- Coffee making
 RegisterNetEvent('mns-UwUCafe:client:MakeCoffee', function()
     local ingredients = {
-        ['uwu-coffeebeans'] = 1,
-        ['uwu-water'] = 1
+        ['uwu_coffeebeans'] = 1,
+        ['uwu_water'] = 1
     }
     
     local foodItem = {
-        name = "uwu-coffee",
+        name = "uwu_coffee",
         label = "Coffee"
     }
     
@@ -484,12 +484,12 @@ end)
 -- Latte making
 RegisterNetEvent('mns-UwUCafe:client:MakeLatte', function()
     local ingredients = {
-        ['uwu-coffeebeans'] = 1,
-        ['uwu-milk'] = 1
+        ['uwu_coffeebeans'] = 1,
+        ['uwu_milk'] = 1
     }
     
     local foodItem = {
-        name = "latte",
+        name = "uwu_latte",
         label = "Latte"
     }
     
@@ -499,14 +499,14 @@ end)
 -- Blackberry Bubble Tea making
 RegisterNetEvent('mns-UwUCafe:client:MakeBlackberryBubbleTea', function()
     local ingredients = {
-        ['uwu-tea'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-blackberries'] = 1,
-        ['uwu-tapioca'] = 1
+        ['uwu_tea'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_blackberries'] = 1,
+        ['uwu_tapioca'] = 1
     }
     
     local foodItem = {
-        name = "blackberry-bubble-tea",
+        name = "blackberry_bubble_tea",
         label = "Blackberry Bubble Tea"
     }
     
@@ -516,14 +516,14 @@ end)
 -- Strawberry Bubble Tea making
 RegisterNetEvent('mns-UwUCafe:client:MakeStrawberryBubbleTea', function()
     local ingredients = {
-        ['uwu-tea'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-strawberries'] = 1,
-        ['uwu-tapioca'] = 1
+        ['uwu_tea'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_strawberries'] = 1,
+        ['uwu_tapioca'] = 1
     }
     
     local foodItem = {
-        name = "strawberry-bubble-tea",
+        name = "strawberry_bubble_tea",
         label = "Strawberry Bubble Tea"
     }
     
@@ -533,14 +533,14 @@ end)
 -- Mint Bubble Tea making
 RegisterNetEvent('mns-UwUCafe:client:MakeMintBubbleTea', function()
     local ingredients = {
-        ['uwu-tea'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-mint'] = 1,
-        ['uwu-tapioca'] = 1
+        ['uwu_tea'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_mint'] = 1,
+        ['uwu_tapioca'] = 1
     }
     
     local foodItem = {
-        name = "mint-bubble-tea",
+        name = "mint_bubble_tea",
         label = "Mint Bubble Tea"
     }
     
@@ -550,13 +550,13 @@ end)
 -- Strawberry Cupcake making
 RegisterNetEvent('mns-UwUCafe:client:MakeStrawberryCupcake', function()
     local ingredients = {
-        ['uwu-flour'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-strawberries'] = 1
+        ['uwu_flour'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_strawberries'] = 1
     }
     
     local foodItem = {
-        name = "strawberry-cupcake",
+        name = "strawberry_cupcake",
         label = "Strawberry Cupcake"
     }
     
@@ -566,13 +566,13 @@ end)
 -- Chocolate Cupcake making
 RegisterNetEvent('mns-UwUCafe:client:MakeChocolateCupcake', function()
     local ingredients = {
-        ['uwu-flour'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-chocolate'] = 1
+        ['uwu_flour'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_chocolate'] = 1
     }
     
     local foodItem = {
-        name = "chocolate-cupcake",
+        name = "chocolate_cupcake",
         label = "Chocolate Cupcake"
     }
     
@@ -582,13 +582,13 @@ end)
 -- Lemon Cupcake making
 RegisterNetEvent('mns-UwUCafe:client:MakeLemonCupcake', function()
     local ingredients = {
-        ['uwu-flour'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-lemon'] = 1
+        ['uwu_flour'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_lemon'] = 1
     }
     
     local foodItem = {
-        name = "lemon-cupcake",
+        name = "lemon_cupcake",
         label = "Lemon Cupcake"
     }
     
@@ -598,13 +598,13 @@ end)
 -- Vanilla Ice Cream making
 RegisterNetEvent('mns-UwUCafe:client:MakeVanillaIceCream', function()
     local ingredients = {
-        ['uwu-milk'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-vanilla'] = 1
+        ['uwu_milk'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_vanilla'] = 1
     }
     
     local foodItem = {
-        name = "vanilla-icecream",
+        name = "vanilla_icecream",
         label = "Vanilla Ice Cream"
     }
     
@@ -614,13 +614,13 @@ end)
 -- Strawberry Ice Cream making
 RegisterNetEvent('mns-UwUCafe:client:MakeStrawberryIceCream', function()
     local ingredients = {
-        ['uwu-milk'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-strawberries'] = 1
+        ['uwu_milk'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_strawberries'] = 1
     }
     
     local foodItem = {
-        name = "strawberry-icecream",
+        name = "strawberry_icecream",
         label = "Strawberry Ice Cream"
     }
     
@@ -630,13 +630,13 @@ end)
 -- Chocolate Ice Cream making
 RegisterNetEvent('mns-UwUCafe:client:MakeChocolateIceCream', function()
     local ingredients = {
-        ['uwu-milk'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-chocolate'] = 1
+        ['uwu_milk'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_chocolate'] = 1
     }
     
     local foodItem = {
-        name = "chocolate-icecream",
+        name = "chocolate_icecream",
         label = "Chocolate Ice Cream"
     }
     
@@ -646,13 +646,13 @@ end)
 -- Nutella Pancake making
 RegisterNetEvent('mns-UwUCafe:client:MakeNutellaPancake', function()
     local ingredients = {
-        ['uwu-flour'] = 1,
-        ['uwu-milk'] = 1,
-        ['uwu-chocolate'] = 1
+        ['uwu_flour'] = 1,
+        ['uwu_milk'] = 1,
+        ['uwu_chocolate'] = 1
     }
     
     local foodItem = {
-        name = "nutella-pancake",
+        name = "nutella_pancake",
         label = "Nutella Pancake"
     }
     
@@ -661,13 +661,13 @@ end)
 
 RegisterNetEvent('mns-UwUCafe:client:MakeOreoPancake', function()
     local ingredients = {
-        ['uwu-flour'] = 1,
-        ['uwu-milk'] = 1,
-        ['uwu-cookies'] = 1
+        ['uwu_flour'] = 1,
+        ['uwu_milk'] = 1,
+        ['uwu_cookies'] = 1
     }
     
     local foodItem = {
-        name = "oreo-pancake",
+        name = "oreo_pancake",
         label = "Oreo Pancake"
     }
     
@@ -677,13 +677,13 @@ end)
 -- Strawberry Milkshake making
 RegisterNetEvent('mns-UwUCafe:client:MakeStrawberryMilkshake', function()
     local ingredients = {
-        ['uwu-milk'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-strawberries'] = 1
+        ['uwu_milk'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_strawberries'] = 1
     }
     
     local foodItem = {
-        name = "strawberry-milkshake",
+        name = "strawberry_milkshake",
         label = "Strawberry Milkshake"
     }
     
@@ -693,13 +693,13 @@ end)
 -- Chocolate Milkshake making
 RegisterNetEvent('mns-UwUCafe:client:MakeChocolateMilkshake', function()
     local ingredients = {
-        ['uwu-milk'] = 1,
-        ['uwu-sugar'] = 1,
-        ['uwu-chocolate'] = 1
+        ['uwu_milk'] = 1,
+        ['uwu_sugar'] = 1,
+        ['uwu_chocolate'] = 1
     }
     
     local foodItem = {
-        name = "chocolate-milkshake",
+        name = "chocolate_milkshake",
         label = "Chocolate Milkshake"
     }
     

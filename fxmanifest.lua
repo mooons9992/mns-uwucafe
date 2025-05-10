@@ -16,6 +16,7 @@ shared_scripts {
 
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
+    'server/sv_version.lua', -- Version control script (added)
     'server.lua',
 }
 
@@ -52,6 +53,9 @@ provides {
     'uwu_cafe'
 }
 
+-- Repository URL for version checker
+repository 'https://github.com/mooons9992/mns-uwucafe'
+
 -- Note about optional dependencies
 dependency_notes [[
 This resource supports multiple target, inventory, and UI systems:
@@ -68,7 +72,9 @@ escrow_ignore {
     'utils.lua',         -- Allow users to extend utility functions
     'functions.lua',     -- Allow users to modify functionality
     'README.md',
-    'LICENSE.md'
+    'LICENSE.md',
+    'version.json',      -- Version file (added)
+    'server/sv_version.lua'  -- Version checker script (added)
 }
 
 -- Metadata for the resource store

@@ -10,7 +10,7 @@ Config.Job = "uwu"
 Config.Target = "ox_target"
 
 -- Inventory system ('qb-inventory', 'ox_inventory', or 'ps-inventory')
-Config.Inventory = "ps-inventory"
+Config.Inventory = "qb-inventory"
 
 -- UI/Menu system ('qb-menu')
 Config.UI = "qb-menu"
@@ -67,19 +67,15 @@ Config.MenuPrices = {
 
 -- Self-service item prices (available to everyone)
 Config.SelfService = {
-    -- Setting items available for self-service (true/false)
     Enabled = true,
-    -- Markup over the regular price for self-service (1.5 = 50% markup)
     SelfServiceMarkup = 1.5,
-    -- Available items for self-service
     Items = {
-        -- Food items
-        ["strawberry-cupcake"] = { price = 38, label = "Strawberry Cupcake" },
-        ["chocolate-cupcake"] = { price = 38, label = "Chocolate Cupcake" },
-        ["lemon-cupcake"] = { price = 38, label = "Lemon Cupcake" },
-        -- Drink items
-        ["uwu-coffee"] = { price = 30, label = "UwU Coffee" },
-        ["uwu-latte"] = { price = 45, label = "UwU Latte" }
+        -- Update these to match your QB Core shared items exactly
+        ["strawberry_cupcake"] = { price = 38, label = "Strawberry Cupcake" },  -- Note underscore
+        ["chocolate_cupcake"] = { price = 38, label = "Chocolate Cupcake" },    -- Note underscore
+        ["lemon_cupcake"] = { price = 38, label = "Lemon Cupcake" },           -- Note underscore
+        ["uwu_coffee"] = { price = 30, label = "UwU Coffee" },                 -- Note underscore
+        ["uwu_latte"] = { price = 45, label = "UwU Latte" }                    -- Note underscore
     }
 }
 
@@ -94,101 +90,101 @@ Config.Prices = {
 Config.Recipes = {
     -- Cupcakes
     StrawberryCupcake = {
-        receivedItem = "strawberry-cupcake",
-        requiredItems = {"uwu-flour", "uwu-sugar", "uwu-strawberries"}
+        receivedItem = "strawberry_cupcake",
+        requiredItems = {"uwu_flour", "uwu_sugar", "uwu_strawberries"}
     },
     
     ChocolateCupcake = {
-        receivedItem = "chocolate-cupcake",
-        requiredItems = {"uwu-flour", "uwu-sugar", "uwu-chocolate"}
+        receivedItem = "chocolate_cupcake",
+        requiredItems = {"uwu_flour", "uwu_sugar", "uwu_chocolate"}
     },
     
     LemonCupcake = {
-        receivedItem = "lemon-cupcake",
-        requiredItems = {"uwu-flour", "uwu-sugar", "uwu-lemon"}
+        receivedItem = "lemon_cupcake",
+        requiredItems = {"uwu_flour", "uwu_sugar", "uwu_lemon"}
     },
     
     -- Ice Cream
     StrawberryIceCream = {
-        receivedItem = "strawberry-icecream",
-        requiredItems = {"uwu-milk", "uwu-sugar", "uwu-strawberries"}
+        receivedItem = "strawberry_icecream",
+        requiredItems = {"uwu_milk", "uwu_sugar", "uwu_strawberries"}
     },
     
     ChocolateIceCream = {
-        receivedItem = "chocolate-icecream",
-        requiredItems = {"uwu-milk", "uwu-sugar", "uwu-chocolate"}
+        receivedItem = "chocolate_icecream",
+        requiredItems = {"uwu_milk", "uwu_sugar", "uwu_chocolate"}
     },
     
     VanillaIceCream = {
-        receivedItem = "vanilla-icecream",
-        requiredItems = {"uwu-milk", "uwu-sugar", "uwu-vanilla"}
+        receivedItem = "vanilla_icecream",
+        requiredItems = {"uwu_milk", "uwu_sugar", "uwu_vanilla"}
     },
     
     -- Pancakes
     NutellaPancake = {
-        receivedItem = "nutella-pancake",
-        requiredItems = {"uwu-flour", "uwu-milk", "uwu-chocolate"}
+        receivedItem = "nutella_pancake",
+        requiredItems = {"uwu_flour", "uwu_milk", "uwu_chocolate"}
     },
     
     OreoPancake = {
-        receivedItem = "oreo-pancake",
-        requiredItems = {"uwu-flour", "uwu-milk", "uwu-cookies"}
-    },
-    
-    -- Muffins
-    ChocolateMuffin = {
-        receivedItem = "chocolate-muffin",
-        requiredItems = {"uwu-flour", "uwu-sugar", "uwu-chocolate"}
-    },
-    
-    -- Chicken Pastry
-    ChickenPastry = {
-        receivedItem = "chicken-pastry",
-        requiredItems = {"uwu-flour", "uwu-sugar", "uwu-chicken"}
+        receivedItem = "oreo_pancake",
+        requiredItems = {"uwu_flour", "uwu_milk", "uwu_cookies"}
     },
     
     -- Waffles
     NutellaWaffle = {
-        receivedItem = "nutella-waffle",
-        requiredItems = {"uwu-flour", "uwu-milk", "uwu-chocolate"}
+        receivedItem = "nutella_waffle",
+        requiredItems = {"uwu_flour", "uwu_milk", "uwu_chocolate"}
+    },
+    
+    -- Chicken Pastry
+    ChickenPastry = {
+        receivedItem = "chicken_pastry",
+        requiredItems = {"uwu_flour", "uwu_sugar", "uwu_chicken"}
+    },
+    
+    -- Muffins
+    ChocolateMuffin = {
+        receivedItem = "chocolate_muffin",
+        requiredItems = {"uwu_flour", "uwu_sugar", "uwu_chocolate"}
     },
     
     -- Coffee and Tea
     Coffee = {
-        receivedItem = "uwu-coffee",
-        requiredItems = {"uwu-coffeebeans", "uwu-water"}
+        receivedItem = "uwu_coffee",
+        requiredItems = {"uwu_coffeebeans", "uwu_water"}
     },
     
     Latte = {
-        receivedItem = "uwu-latte",
-        requiredItems = {"uwu-coffeebeans", "uwu-milk"}
+        receivedItem = "uwu_latte",
+        requiredItems = {"uwu_coffeebeans", "uwu_milk"}
     },
     
     -- Bubble Tea
     BlackberryBubbleTea = {
-        receivedItem = "bubble-blackberry",
-        requiredItems = {"uwu-tea", "uwu-sugar", "uwu-blackberries", "uwu-tapioca"}
+        receivedItem = "blackberry_bubble_tea",
+        requiredItems = {"uwu_tea", "uwu_sugar", "uwu_blackberries", "uwu_tapioca"}
     },
     
     StrawberryBubbleTea = {
-        receivedItem = "bubble-strawberry",
-        requiredItems = {"uwu-tea", "uwu-sugar", "uwu-strawberries", "uwu-tapioca"}
+        receivedItem = "strawberry_bubble_tea",
+        requiredItems = {"uwu_tea", "uwu_sugar", "uwu_strawberries", "uwu_tapioca"}
     },
     
     MintBubbleTea = {
-        receivedItem = "bubble-mint",
-        requiredItems = {"uwu-tea", "uwu-sugar", "uwu-mint", "uwu-tapioca"}
+        receivedItem = "mint_bubble_tea",
+        requiredItems = {"uwu_tea", "uwu_sugar", "uwu_mint", "uwu_tapioca"}
     },
     
     -- Milkshakes
     StrawberryMilkshake = {
-        receivedItem = "milkshake-strawberry",
-        requiredItems = {"uwu-milk", "uwu-sugar", "uwu-strawberries"}
+        receivedItem = "strawberry_milkshake",
+        requiredItems = {"uwu_milk", "uwu_sugar", "uwu_strawberries"}
     },
     
     ChocolateMilkshake = {
-        receivedItem = "milkshake-chocolate",
-        requiredItems = {"uwu-milk", "uwu-sugar", "uwu-chocolate"}
+        receivedItem = "chocolate_milkshake",
+        requiredItems = {"uwu_milk", "uwu_sugar", "uwu_chocolate"}
     }
 }
 

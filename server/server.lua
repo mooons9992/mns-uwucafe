@@ -367,27 +367,44 @@ RegisterNetEvent('mns-UwUCafe:server:PurchaseMenuItem', function(item, price, us
     local Player = QBCore.Functions.GetPlayer(src)
     if not Player then return end
     
-    -- Check account type (bank or cash)
-    local accountType = useBank and 'bank' or 'cash'
+    -- Debug
+    if Config.Debug then
+        print("^3UwU Cafe Debug^7: Player " .. GetPlayerName(src) .. " is purchasing item: " .. item)
+        print("^3UwU Cafe Debug^7: Checking if item exists in QBCore.Shared.Items")
+    end
+    
+    -- Check if the item exists in the shared items database
+    if not QBCore.Shared.Items[item] then
+        print("^1UwU Cafe ERROR^7: Item " .. item .. " is missing from QBCore.Shared.Items!")
+        TriggerClientEvent('QBCore:Notify', src, "This item doesn't exist in the database: " .. item, "error")
+        return
+    end
     
     -- Check if player has enough money
-    if not Player.PlayerData.money or Player.PlayerData.money[accountType] < price then
-        TriggerClientEvent('QBCore:Notify', src, "You don't have enough " .. (useBank and "money in your bank account" or "cash") .. ".", "error")
+    local moneyType = useBank and 'bank' or 'cash'
+    if Player.PlayerData.money[moneyType] < price then
+        TriggerClientEvent('QBCore:Notify', src, "You don't have enough money in your " .. moneyType, "error")
         return
     end
     
-    -- Check if item exists in shared items
-    if not QBCore.Shared.Items[item] then
-        TriggerClientEvent('QBCore:Notify', src, "Invalid item.", "error")
+    -- Remove money
+    Player.Functions.RemoveMoney(moneyType, price)
+    
+    -- Try to add the item, check if successful
+    local success = Player.Functions.AddItem(item, 1)
+    if not success then
+        -- Refund the money if item couldn't be added
+        Player.Functions.AddMoney(moneyType, price)
+        TriggerClientEvent('QBCore:Notify', src, "Couldn't add item to inventory. Money refunded.", "error")
         return
     end
     
-    -- Remove money from player (from bank or cash)
-    Player.Functions.RemoveMoney(accountType, price, "UwU Cafe Purchase")
+    -- Send single notification using the proper item label
+    local itemLabel = QBCore.Shared.Items[item].label or item
+    TriggerClientEvent('QBCore:Notify', src, "You purchased a " .. itemLabel, "success")
     
-    -- Add item to player inventory
-    Player.Functions.AddItem(item, 1)
-    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add")
+    -- Update inventory UI
+    TriggerClientEvent("inventory:client:ItemBox", src, QBCore.Shared.Items[item], "add")
     
     -- Add money to society using the event instead of direct export
     -- This is more compatible across different versions of qb-management
@@ -478,5 +495,18 @@ AddEventHandler('onResourceStart', function(resourceName)
     if Config.Debug then
         print("^2UwU Cafe^7: Server script started")
         print("^2UwU Cafe^7: Using server events for qb-management instead of direct exports for better compatibility")
+    end
+end)
+
+-- Version check display on server start
+Citizen.CreateThread(function()
+    Citizen.Wait(2000) -- Wait for resource to fully start
+    
+    local resource = GetCurrentResourceName()
+    local version = GetResourceMetadata(resource, 'version', 0)
+    
+    if version then
+        print('^2['..resource..'] ^5Version: ^7' .. version)
+        print('^2['..resource..'] ^5Created by: ^7Mooons')
     end
 end)
